@@ -1,4 +1,4 @@
-﻿namespace ApplicationTemplate.Services;
+﻿namespace Class_5.Services;
 
 /// <summary>
 ///     This service interface only exists an example.
@@ -7,5 +7,6 @@
 public interface IFileService
 {
     void Read();
-    void Write();
+    void Write(int movieId, string movieTitle, string genresString);
+    void Display();
 }

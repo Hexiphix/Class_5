@@ -1,4 +1,4 @@
-﻿namespace ApplicationTemplate.Services;
+﻿namespace Class_5.Services;
 
 public interface IMainService
 {

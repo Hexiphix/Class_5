@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ApplicationTemplate.Services;
+namespace Class_5.Services;
 
 /// <summary>
 ///     You would need to inject your interfaces here to execute the methods in Invoke()
@@ -29,11 +29,12 @@ public class MainService : IMainService
             // Is it part of the FileService or some other service?
             if (choice == "1")
             {
-                _fileService.Write();
+                _fileService.Write(999999, "My Super Cool Movie", "Action|Horror");
             }
             else if (choice == "2")
             {
                 _fileService.Read();
+                _fileService.Display();
             }
         }
         while (choice != "X");

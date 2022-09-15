@@ -1,5 +1,5 @@
 ﻿using System;
-using ApplicationTemplate.Services;
+using Class_5.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ApplicationTemplate;
