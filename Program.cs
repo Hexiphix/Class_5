@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Class_5.Services;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,6 +13,8 @@ public class Program
     /// <param name="args"></param>
     private static void Main(string[] args)
     {
+        Console.WriteLine(Directory.GetCurrentDirectory());
+
         try
         {
             var startup = new Startup();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.Extensions.Logging;
 using static System.Net.WebRequestMethods;
@@ -15,6 +16,7 @@ public class FileService : IFileService
 {
     private ILogger<IFileService> _logger;
     private string _fileName;
+    private int? _nextId = null;
 
     //these should not be here
     private List<int> _movieIds;
@@ -45,7 +47,16 @@ public class FileService : IFileService
         _logger = logger;
         logger.LogInformation("Here is some information");
 
-        _fileName = "C:/Users/jmole/WCTC/Net Databases/Class_5/movies.csv";
+        _fileName = $"{Environment.CurrentDirectory}";
+        if (_fileName.Substring(_fileName.Length - 16, 16).Equals("bin\\Debug\\net6.0"))
+        {
+            _fileName = _fileName.Remove(_fileName.Length - 16, 16);
+            _fileName = $"{_fileName}movies.csv";
+        }
+        else
+        {
+            _fileName = $"{_fileName}\\movies.csv";
+        }
 
         _movieIds = new List<int>();
         _movieTitles = new List<string>();
@@ -141,5 +152,32 @@ public class FileService : IFileService
             Console.WriteLine($"Genre(s): {_movieGenres[i]}");
             Console.WriteLine();
         }
+    }
+
+    public int? GetNextInt()
+    {
+        if(_nextId == null)
+        { _nextId = (_movieIds.Max() + 1); }
+        else
+        { _nextId++; }
+        _logger.LogInformation($"Next ID found successfully, ID: {_nextId}");
+        return _nextId;
+    }
+
+    public bool CheckTitles(string nextTitle)
+    {
+        bool present = false;
+        foreach(string title in _movieTitles)
+        {
+            if (title.Equals(nextTitle))
+            { present = true; break; }
+        }
+
+        if(present == true)
+        { _logger.LogInformation($"Movie titled {nextTitle} already exists"); }
+        else
+        { _logger.LogInformation($"Movie titled {nextTitle} not found on database"); }
+
+        return present;
     }
 }
